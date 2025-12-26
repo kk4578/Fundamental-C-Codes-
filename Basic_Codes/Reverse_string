@@ -1,0 +1,31 @@
+#include <stdio.h>
+// Function to reverse the string in place using XOR swap
+void reverse_inplace(char *s) {
+    if (!s) return;               // If string is NULL, do nothing
+    char *l = s, *r = s;
+
+    // Move 'r' to the end of string
+    while (*r) r++;
+    r--; // Point to last character (before '\0')
+
+    // Swap characters using XOR until l < r
+    while (l < r) {
+        *l ^= *r;    // XOR swap step 1
+        *r ^= *l;    // XOR swap step 2
+        *l ^= *r;    // XOR swap step 3
+        l++;         // Move left pointer forward
+        r--;         // Move right pointer backward
+    }
+}
+
+int main(void) {
+    char s[256];
+
+    // Read input string (including spaces)
+    if (!fgets(s, sizeof s, stdin)) return 0;
+
+    reverse_inplace(s);           // Call reverse function
+    printf("%s", s);              // Print reversed string
+    return 0;
+}
+
